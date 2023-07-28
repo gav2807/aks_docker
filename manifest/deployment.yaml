@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-deployment
+  labels:
+    app: optix-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: optix-app
+  template:
+    metadata:
+      labels:
+        app: optix-app
+    spec:
+      containers:
+      - name: optix-app
+        image: optix/optix-app
+---        
+apiVersion: v1
+kind: Service
+metadata:
+  name: optix-app
+  namespace: default
+spec:
+  ports:
+  - nodePort: 30702
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: optix-app
+  sessionAffinity: None
+  type: LoadBalancer
