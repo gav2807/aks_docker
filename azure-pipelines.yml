@@ -6,7 +6,7 @@ pool:
 
 variables:
   appName: optix-app
-  tag: 175
+  tag: 227
 
 stages:
 - stage: Build
@@ -52,14 +52,15 @@ stages:
     - task: KubectlInstaller@0
       inputs:
         kubectlVersion: 'latest'
-    - task: KubernetesManifest@0
+
+    - task: KubernetesManifest@1
       inputs:
         action: 'deploy'
+        connectionType: 'kubernetesServiceConnection'
         kubernetesServiceConnection: 'AKS-k8scluster-svc'
         namespace: 'default'
         manifests: '$(System.ArtifactsDirectory)/manifest/deployment.yaml'
         containers: 'optix-app:$(tag)'
-
     # - script: |
     #     docker build -t $(appName):$(Build.BuildId) .
     #   displayName: 'Build Docker Image'
