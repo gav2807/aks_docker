@@ -25,7 +25,7 @@ metadata:
   namespace: default
 spec:
   ports:
-  - nodePort: 30702
+  - nodePort: 5500
     port: 5000
     protocol: TCP
     targetPort: 5000
