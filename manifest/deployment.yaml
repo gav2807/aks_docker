@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: optix-app
-        image: optix.azurecr.io/optix-app
+        image: optix.azurecr.io/optix-app:latest
 ---        
 apiVersion: v1
 kind: Service
